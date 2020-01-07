@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Consolas Regular';
+}
+
+body {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #005c99;
+    background-image: url("file:///C:/Users/user/Downloads/wave%20(5).svg");
+    background-position: top;
+}
+
+.container {
+    height: 87vh;
+    width: 35vw;
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    background-color: #33adff;
+    background-image: url("file:///C:/Users/user/Downloads/wave%20(1).svg"), url("file:///C:/Users/user/Downloads/wave%20(2).svg");
+    background-position: bottom, top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    box-shadow: .5em .5em 1em black;
+}
+
+.label {
+    padding: 1em;
+}
+
+.label h3 {
+    font-family: cursive;
+}
+
+.input-field input {
+    outline: none;
+    border: none;
+    font-size: 1.15em;
+    border-bottom: .1em solid #ffffff8c;
+    transition: .04s linear font-size;
+    background: transparent;
+}
+
+.input-field button {
+    outline: none;
+    border: none;
+    background: #f7a309;
+    border-radius: .2em;
+    padding: .3em .5em;
+    box-shadow: .15em .11em .1em #333;
+    cursor: pointer;
+    transition: .5s box-shadow;
+}
+
+button:active {
+    box-shadow: 0em 0em #333;
+}
+
+.to-do-display ul {
+    list-style-type: none;
+    font-size: 1.3em;
+}
+
+.to-do-display li {
+    display: flex;
+    justify-content: space-between;
+    font-size: .8em;
+    padding: .2em;
+}
+
+.to-do-display li span {
+    margin-right: .3em;
+}
+
+.input-field input[type='text']:focus {
+    font-size: 1.3em;
+    border-bottom-color: #e0e0e0;
+}
+
+.to-do-display button {
+    background-color: #ffffff;
+    border: none;
+    border-radius: .2em;
+    box-shadow: .15em .15em .3em #333;
+    padding: .3em;
+    color: #1b1b1b;
+    outline: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        width: 80vw;
+    }
+}
