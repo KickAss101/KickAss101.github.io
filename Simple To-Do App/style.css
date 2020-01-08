@@ -95,6 +95,6 @@ button:active {
 
 @media (max-width: 1000px) {
     .container {
-        width: 80vw;
+        width: 90vw;
     }
 }
