@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    height: 80vh;
+    height: 87vh;
     width: 35vw;
     margin: 1em auto;
     display: flex;
@@ -95,6 +95,6 @@ button:active {
 
 @media (max-width: 1000px) {
     .container {
-        width: 90vw;
+        width: 80vw;
     }
 }
