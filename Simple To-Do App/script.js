@@ -26,8 +26,9 @@ add.addEventListener("click", (e) => {
 function del(x){
     let deleteElement = x.parentElement.parentElement.firstChild
     todoArr = getStoredData()
-    todoArr = todoArr.filter(ele => {return ele != deleteElement.innerText})
-    localStorage.setItem("todos", JSON.stringify(todoArr)) //update local storage
+    let updatedArr = todoArr.filter(ele => {return ele != deleteElement.innerText})
+    localStorage.setItem("todos", JSON.stringify(updatedArr)) //update local storage
+    todoArr = updatedArr
     x.parentElement.parentElement.remove() //removes <li></li> 
 }
 
