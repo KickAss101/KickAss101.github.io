@@ -42,13 +42,21 @@ body, html{
     min-height: 30vh;
 }
 
+.greeting{
+    opacity: 0;
+    font-size: 3rem !important;
+    transform: translateY(1rem);
+    transition: .8s all ease-in-out;
+}
+
 .middel p.greeting::first-letter{
     font-size: 5rem;
     color: #ff5e00;
 }
 
-.middel p.greeting{
-    font-size: 3rem;
+.appear{
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .middel p, footer{
@@ -86,10 +94,6 @@ footer{
 }
 
 @media(max-width:586px){
-
-    .main{
-        background-attachment: scroll;
-    }
 
     .showcase{
         display: flex;
