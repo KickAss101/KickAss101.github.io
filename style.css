@@ -64,8 +64,8 @@ main{
 }
 
 #animate{
-    animation: blink .8s 10 none;
-    -webkit-animation: blink .8s linear 10 none;
+    animation: blink .8s linear 2.5s 10 none;
+    -webkit-animation: blink .8s linear 2.5s 10 none;
 }
 
 @keyframes blink{

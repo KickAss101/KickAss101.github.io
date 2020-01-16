@@ -5,9 +5,9 @@ let i = 0
 window.addEventListener("scroll", () => {
     appear(".greeting", 1, 0)
     appear(".code", 1, .2)
-    appear(".echo", 0, 7.8)
+    appear(".echo", 0, 10)
     if(text.getBoundingClientRect().top < screenPosition){
-        setInterval(typeWriter, 100, "#animate")
+        setTimeout(() => setInterval(typeWriter, 100, "#animate"), 2500)
     }
 },)
 
