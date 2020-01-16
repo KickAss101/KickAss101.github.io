@@ -55,40 +55,27 @@ main{
     color: #ff0000;
 }
 
-.about-me, .line, .echo{
+.about-me, #animate, .echo{
     font-family: "Consolas regular";
 }
 
-.line, .echo{
+#animate, .echo{
     color: #008100;
 }
 
-.line{
-    opacity: 0;
-    position: absolute;
-    left: 11em;
-    transform: translate(1em, -1.5em);
-    margin: 0 auto;
-    border-right: 2px solid rgba(255,255,255,.75);
-    font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden;   
+#animate{
+    animation: blink .8s 10 none;
+    -webkit-animation: blink .8s linear 10 none;
 }
 
-/* Animation */
-.anim-typewriter{
-  animation: typewriter 7s steps(67) 1.5s 1 backwards,
-             blinkTextCursor .5s steps(67) 18 forwards;
+@keyframes blink{
+    0%{border-right: none}
+    90%{border-right: 2px solid #ffffffd0}
 }
 
-@keyframes typewriter{
-  from{width: 0;}
-  to{width: 65%;}
-}
-
-@keyframes blinkTextCursor{
-  from{border-right-color: rgba(255,255,255,.75)}
-  to{border-right-color: transparent}
+@-webkit-keyframes blink{
+    0%{border-right: none}
+    90%{border-right: 2px solid #ffffffd0}
 }
 
 .middel{
