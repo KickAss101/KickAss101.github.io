@@ -1,14 +1,13 @@
 const screenPosition = window.innerHeight / 1.5
-const text = document.querySelector("#animate")
+const animateText = document.querySelector("#animate")
 let i = 0
 
 window.addEventListener("scroll", () => {
+    const code = document.querySelector(".code")
     appear(".greeting", 1, 0)
     appear(".code", 1, .2)
-    appear(".echo", 0, 10)
-    if(text.getBoundingClientRect().top < screenPosition){
-        setTimeout(() => setInterval(typeWriter, 100, "#animate"), 2500)
-    }
+    code.addEventListener("transitionend", typeWriter)
+    animateText.addEventListener("animationend", () =>  appear(".echo", 0, 0))
 },)
 
 function appear(ele, speed, delay){
@@ -20,11 +19,11 @@ function appear(ele, speed, delay){
     }
 }
 
-function typeWriter(selector){
+function typeWriter(){
     let text = `echo "I'm a web developer, this is just a showcase of my projects."`
-    let ele = document.querySelector(selector)
     if(i < text.length){
-        ele.innerHTML += text.charAt(i)
+        animateText.innerHTML += text.charAt(i)
         i++
     }
+    setInterval(typeWriter, 150)
 }

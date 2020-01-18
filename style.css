@@ -109,7 +109,8 @@ main{
 }
 
 .showcase{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .card{
@@ -137,6 +138,6 @@ main{
 
 @media (max-width: 650px){
     .showcase{
-    flex-wrap: wrap;
+        grid-template-columns: 1fr;
     }
 }
