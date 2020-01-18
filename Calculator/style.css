@@ -19,7 +19,7 @@ body{
     -moz-box-shadow:    6px 6px 1em #000;  
     box-shadow:         6px 6px 1em #000; 
     border-radius: .5em;
-    width: auto;
+    width: 30vw;
     height: 80vh;
 }
 
@@ -65,8 +65,12 @@ button{
     color: #ff4f00;
 }
 
-@media (min-width: 800px){
+@media (max-width: 650px){
+    body{
+        background-size: contain;
+    }
+
     .container{
-        width: 25vw;
+        width: 85vw !important;
     }
 }
