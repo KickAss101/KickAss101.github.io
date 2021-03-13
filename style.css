@@ -17,7 +17,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("images/main-bg.jpg");
+    background-image: url("images/main-bg.jpeg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
