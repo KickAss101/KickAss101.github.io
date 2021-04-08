@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<!-- Show avilable posts -->
+
+
+<h3>Hi, if you're new to hacking like me, find me on about page</h3>
+
+
+<main>
+    {% for post in site.posts %}
+        <article class="card">
+            <span>
+                <a class="card-title" href="{{ post.url }}">{{ post.title }}</a>
+                <small>{{ post.date | date: "%-d %B %Y" }}</small>
+            </span>
+            {{ post.excerpt }} 
+            <i><a href="{{ post.url }}">Read more...</a></i>
+        </article>
+    {% endfor %}
+</main>
