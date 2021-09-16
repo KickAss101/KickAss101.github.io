@@ -9,7 +9,7 @@ permalink: /about/
 H3ll0, h4ck3r!
 I blog as I learn
 
-The idea of this blog is to make n00b friendly writeups and also it'b a good pratice for me to check through what I've learnt...
+The idea of this blog is to make n00b friendly writeups and also it would be a good pratice for me to improve my skills
 ```
 <hr>
 
