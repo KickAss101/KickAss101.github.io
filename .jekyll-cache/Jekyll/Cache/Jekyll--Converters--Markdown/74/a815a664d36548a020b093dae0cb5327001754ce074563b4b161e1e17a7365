@@ -1,0 +1,116 @@
+I"j<p><em>A quick guide for the people who know basic python but don’t know how to implement it in infosec context.</em>
+<br /><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data Types Categories</th>
+      <th>Types</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Text types</td>
+      <td>str</td>
+    </tr>
+    <tr>
+      <td>Numeric Types</td>
+      <td>int, float, complex</td>
+    </tr>
+    <tr>
+      <td>Sequence Types</td>
+      <td>list(mutable)<code class="language-plaintext highlighter-rouge">[0,1]</code>, tuple(immutable)<code class="language-plaintext highlighter-rouge">(0,1)</code>, range</td>
+    </tr>
+    <tr>
+      <td>Mapping Type</td>
+      <td>dict <code class="language-plaintext highlighter-rouge">{"key":"value"}</code></td>
+    </tr>
+    <tr>
+      <td>Set Types</td>
+      <td>set, frozenset <code class="language-plaintext highlighter-rouge">{0,1,2,3}</code></td>
+    </tr>
+    <tr>
+      <td>Boolean Type</td>
+      <td>bool <code class="language-plaintext highlighter-rouge">True False</code></td>
+    </tr>
+    <tr>
+      <td>Binary Types</td>
+      <td>bytes, bytearray, memoryview</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Data type of any object can be obtained by using the <code class="language-plaintext highlighter-rouge">type()</code> function</p>
+</blockquote>
+
+<hr />
+<center><h3>Handling Web Requests</h3></center>
+
+<p><strong>Packages</strong></p>
+<ul>
+  <li>requests</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Functions</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>requests.get()</td>
+      <td>Returns requests.Response() object</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><a href="https://www.w3schools.com/python/ref_requests_response.asp">requests.response() - w3schools</a></li>
+</ul>
+
+<p><strong>Snippet</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"https://www.google.com/"</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">content</span>
+<span class="k">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+<hr />
+<center><h3>Sockets</h3></center>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">socket</span>
+</code></pre></div></div>
+
+<hr />
+<center><h3>Command line Arguments</h3></center>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="c1"># Initialize the parser
+</span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+
+<span class="c1"># Add optional parameters
+</span><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-t"</span><span class="p">,</span><span class="s">"--target"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"provide target"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">"str"</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s">"google.com"</span><span class="p">)</span>
+
+<span class="c1"># Parse arguments
+</span><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">target</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>Example</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># python3 args.py -t yahoo.com</span>
+<span class="c"># python3 args.py --target yahoo.com</span>
+</code></pre></div></div>
+<hr />
+<center><h3>Oops</h3></center>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="n">__main__</span><span class="p">:</span>
+	<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+:ET

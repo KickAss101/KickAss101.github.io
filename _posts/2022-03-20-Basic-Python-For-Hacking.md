@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Baisc Python For Hacking"
+title: "Baisc Python For Hecking"
 date: 2022-03-20 00:00:0
 permalink: basic-python-for-hacking/
 tags: python hacking
@@ -19,10 +19,11 @@ _A quick guide for the people who know basic python but don't know how to implem
 |Boolean Type|bool `True False`|
 |Binary Types|bytes, bytearray, memoryview|
 
->Data type of any object can be obtained by using the `type()` function
+
+> Data type of any object can be obtained by using the `type()` function
 
 ---
-<center><h3>Handling Web Requests</h3></center>
+<center><h2>Handling Web Requests</h2></center>
 
 __Packages__
 - requests
@@ -43,14 +44,14 @@ content = res.content
 print(content)
 ```
 ---
-<center><h3>Sockets</h3></center> 
+<center><h2>Sockets</h2></center> 
 
 ```python
 import socket
 ```
 
 ---
-<center><h3>Command line Arguments</h3></center>
+<center><h2>Command line Arguments</h2></center>
 
 ```python
 import argparse
@@ -73,7 +74,7 @@ Example
 # python3 args.py --target yahoo.com
 ```
 ---
-<center><h3>Oops</h3></center>
+<center><h2>Oops</h2></center>
 
 ```python
 def main():
@@ -82,3 +83,7 @@ def main():
 if __name__ == __main__:
 	main()
 ```	
+
+< post under construction />
+
+come back later >>

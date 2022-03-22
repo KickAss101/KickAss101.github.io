@@ -1,0 +1,277 @@
+I"p-<p><em>A quick guide for the people who know scripting in general but don’t know goLang.</em>
+<br /><br /></p>
+
+<h3 id="prequests">Prequests:</h3>
+<ul>
+  <li>Familiar with programming in general</li>
+  <li>Familiarization with C and Python helps but not necessary
+<br /><br /></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data Types</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>var x &lt;type&gt;</td>
+      <td>Variable declaration</td>
+    </tr>
+    <tr>
+      <td>x := &lt;value&gt;</td>
+      <td>Variable declaration &amp; Assignment</td>
+    </tr>
+    <tr>
+      <td>var x[&lt;size&gt;] &lt;type&gt;</td>
+      <td>Array declaration</td>
+    </tr>
+    <tr>
+      <td>x := [3]int{0,1,2}</td>
+      <td>Array declaration &amp; Assignment</td>
+    </tr>
+    <tr>
+      <td>x := []int{}</td>
+      <td>Slice of int type, flexible</td>
+    </tr>
+    <tr>
+      <td>x := make(map[string]int)</td>
+      <td>Maps declaration; key-value pairs</td>
+    </tr>
+    <tr>
+      <td>x[“a”] = 1337</td>
+      <td>Maps Assignment</td>
+    </tr>
+    <tr>
+      <td>nil</td>
+      <td>Zero value for pointers, interfaces, maps, slices, func types</td>
+    </tr>
+    <tr>
+      <td>float64 / float32</td>
+      <td>float for respective architecture</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Functions</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>fmt.Println()</td>
+      <td>Like print() in python</td>
+    </tr>
+    <tr>
+      <td>fmt.Printf()</td>
+      <td>Like printf() in C</td>
+    </tr>
+    <tr>
+      <td>fmt.Scan()</td>
+      <td>Like scanf() in C</td>
+    </tr>
+    <tr>
+      <td>string()</td>
+      <td>Converts int, bytes into string</td>
+    </tr>
+    <tr>
+      <td>append(array, value)</td>
+      <td>Append value &amp; return new array</td>
+    </tr>
+    <tr>
+      <td>len(array)</td>
+      <td>Return Array length</td>
+    </tr>
+    <tr>
+      <td>delete(x, “key”)</td>
+      <td>Delete key:value from map “x”</td>
+    </tr>
+    <tr>
+      <td>errors.New(“error!”)</td>
+      <td>User-defined error</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Formatting</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>%v</td>
+      <td>Variable</td>
+    </tr>
+    <tr>
+      <td>%T</td>
+      <td>type of variable</td>
+    </tr>
+    <tr>
+      <td>%d</td>
+      <td>decimal</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Example</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">:=</span> <span class="m">1337</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%d %v %T"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Visibility</th>
+      <th>Scope</th>
+      <th>Snippet</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Block level</td>
+      <td>inside blocks <code class="language-plaintext highlighter-rouge">{}</code></td>
+      <td>x := 10</td>
+    </tr>
+    <tr>
+      <td>Package level</td>
+      <td>Outside all functions</td>
+      <td>var int x = 10</td>
+    </tr>
+    <tr>
+      <td>Global level</td>
+      <td>Outside all functions with Capital letter convention</td>
+      <td>var X int = 1337</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h2 id="loops">Loops</h2>
+<p><strong>For Loop</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="m">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>While like loop</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span> <span class="o">:=</span> <span class="m">0</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+	<span class="n">i</span><span class="o">++</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>foreach like loop</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">array</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"index:"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">"value:"</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="functions">Functions</h2>
+
+<p><strong>Function syntax</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="kt">int</span><span class="p">,</span> <span class="n">y</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span><span class="p">{</span>
+	<span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Function with multiple return values</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">sum_and_product</span><span class="p">(</span><span class="n">x</span> <span class="kt">int</span><span class="p">,</span> <span class="n">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+<h2 id="struct-type">Struct Type</h2>
+<ul>
+  <li>Collection of fields</li>
+</ul>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">person</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">name</span> <span class="kt">string</span>
+	<span class="n">age</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">p</span> <span class="o">:=</span> <span class="n">person</span><span class="p">{</span><span class="n">name</span><span class="o">:</span><span class="s">"Malcom"</span><span class="p">,</span> <span class="n">age</span><span class="o">:</span><span class="m">18</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<hr />
+<h2 id="pointers">Pointers</h2>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">i</span> <span class="o">:=</span> <span class="m">0</span>
+	<span class="n">inc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">inc</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="o">*</span><span class="n">i</span><span class="o">++</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<center><h2>Handling Web Requests</h2></center>
+
+<p><strong>Packages</strong></p>
+<ul>
+  <li>net/http</li>
+  <li>io</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Functions</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>http.Get()</td>
+      <td>Returns *http.Response pointer &amp; error</td>
+    </tr>
+    <tr>
+      <td>io.ReadAll(res.Body)</td>
+      <td>Returns bytes &amp; error</td>
+    </tr>
+    <tr>
+      <td>defer res.Body.Close()</td>
+      <td>Close connection after function ends</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Snippet</strong></p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">(</span>
+	<span class="s">"fmt""io"</span>
+	<span class="s">"net/http"</span><span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">res</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s">"https://www.google.com/"</span><span class="p">)</span>
+	
+	<span class="n">checkError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+	
+	<span class="n">dataBytes</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">io</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>	
+	<span class="n">checkError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+	
+	<span class="n">content</span> <span class="o">:=</span> <span class="kt">string</span><span class="p">(</span><span class="n">dataBytes</span><span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c">// Check for errors</span>
+<span class="k">func</span> <span class="n">checkError</span><span class="p">(</span><span class="n">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET
