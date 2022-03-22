@@ -9,7 +9,7 @@ github_username: KickAss101
 author: KickAss101
 
 github:
-  repository_url: https://github.com/KickAss101
+  repository_url: https://github.com/KickAss101/kickass101.github.io/
 
 # Build settings
 theme: jekyll-theme-hacker
