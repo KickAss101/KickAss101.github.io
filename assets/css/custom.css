@@ -46,8 +46,11 @@ span small {
     margin: 0 auto;
 }
 
-/* Responsive for mobile devices */
+blockquote {
+    border: 1px solid aqua;
+}
 
+/* Responsive for mobile devices */
 @media screen and (max-width: 600px) {
     body h2 {
             font-size: .88em;
