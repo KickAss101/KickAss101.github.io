@@ -80,6 +80,7 @@ __Ports:__ 22,80,8000
 -   `/product/1`
 -   `/product/1?xml` [XML output]
 -   `/product/1?xml` [XXE] [POST]
+
 <br>
 ```xml
 <!DOCTYPE foo [
