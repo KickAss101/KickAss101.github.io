@@ -2,7 +2,7 @@
 layout: post
 title: "Nahamstore Recon Notes"
 date: 2022-03-20 00:00:0
-permalink: basic-goLang-for-hacking/
+permalink: nahamstore-recon-notes/
 tags: bug bounty tryhackme
 ---
 _Not a walkthrough or writeup. Just my raw recon notes and vulnerabilities_
