@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nahamstore Recon Notes"
-date: 2022-03-20 00:00:0
+date: 2022-08-16 00:00:0
 permalink: nahamstore-recon-notes/
 tags: bug bounty tryhackme
 ---
