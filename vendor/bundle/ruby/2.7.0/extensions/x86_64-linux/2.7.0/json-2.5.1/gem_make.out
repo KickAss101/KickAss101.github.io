@@ -1,0 +1,13 @@
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+/usr/bin/ruby2.7 -I /usr/lib/ruby/vendor_ruby -r ./siteconf20221110-37783-1him8qi.rb extconf.rb
+creating Makefile
+
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+make DESTDIR\= clean
+
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+make DESTDIR\=
+make: Nothing to be done for 'all'.
+
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/json-2.5.1/ext/json
+make DESTDIR\= install

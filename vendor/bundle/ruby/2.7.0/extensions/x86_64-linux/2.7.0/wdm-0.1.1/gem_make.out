@@ -1,0 +1,11 @@
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/wdm-0.1.1/ext/wdm
+/usr/bin/ruby2.7 -I /usr/lib/ruby/vendor_ruby -r ./siteconf20221110-37783-vczqb5.rb extconf.rb
+
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/wdm-0.1.1/ext/wdm
+make DESTDIR\= clean
+
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/wdm-0.1.1/ext/wdm
+make DESTDIR\=
+
+current directory: /home/kickass101/git/KickAss101.github.io/vendor/bundle/ruby/2.7.0/gems/wdm-0.1.1/ext/wdm
+make DESTDIR\= install

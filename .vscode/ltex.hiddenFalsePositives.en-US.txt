@@ -1,0 +1,1 @@
+{"rule":"DOUBLE_NEGATIVE","sentence":"^\\QUm, we don't see no other ports than \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, but the challenge said that there's port: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q\nPort: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is another port where SSH usually runs, I thought maybe this had to do with SSH.\\E$"}

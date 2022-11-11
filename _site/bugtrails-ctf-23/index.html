@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <!-- Fontawesome icons cdn -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" 
+    crossorigin="anonymous"/>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Bug Trails CTF 23 | KickAss101</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="Bug Trails CTF 23" />
+<meta name="author" content="KickAss101" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Bug Trails 23 Write-up This is my first CTF where I actually made it to the top. I had a chance to try my bug hunting skills that I’ve been learning for a while now." />
+<meta property="og:description" content="Bug Trails 23 Write-up This is my first CTF where I actually made it to the top. I had a chance to try my bug hunting skills that I’ve been learning for a while now." />
+<link rel="canonical" href="https://kickass101.github.io/bugtrails-ctf-23/" />
+<meta property="og:url" content="https://kickass101.github.io/bugtrails-ctf-23/" />
+<meta property="og:site_name" content="KickAss101" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-10T00:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bug Trails CTF 23" />
+<script type="application/ld+json">
+{"description":"Bug Trails 23 Write-up This is my first CTF where I actually made it to the top. I had a chance to try my bug hunting skills that I’ve been learning for a while now.","url":"https://kickass101.github.io/bugtrails-ctf-23/","@type":"BlogPosting","headline":"Bug Trails CTF 23","dateModified":"2022-11-10T00:00:00+05:30","datePublished":"2022-11-10T00:00:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"https://kickass101.github.io/bugtrails-ctf-23/"},"author":{"@type":"Person","name":"KickAss101"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <a id="a-title" href="/">
+          <h1>KickAss101</h1>
+        </a>
+        <h2>Writeups/Walkthroughs for n00bs by a n00b :)</h2>
+
+        <section id="downloads">
+          
+        </section>
+        <!-- Navigation links -->
+<ul class="links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/">About</a></li>
+</ul>
+        <a href="https://github.com/KickAss101/kickass101.github.io/" class="btn btn-github"><span class="icon"></span>Source Code</a>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <small>10 November 2022</small>
+<h1>Bug Trails CTF 23</h1>
+
+<p><em>Bug Trails 23 Write-up</em>
+<br /><br />
+This is my first CTF where I actually made it to the top. I had a chance to try my bug hunting skills that I’ve
+been learning for a while now.</p>
+
+<h2 id="overview-of-the-bug-trails-23">Overview of the Bug Trails 23</h2>
+<p><strong>There were four challenges:</strong></p>
+<ul>
+  <li>BugFile (Web) (400 points)</li>
+  <li>Admin Panel (Web) (400 points)</li>
+  <li>An open port (Web) (400 points)</li>
+  <li>Bibliosmia (Misc) (300 points)</li>
+</ul>
+
+<hr />
+
+<h2 id="bugfile">BugFile</h2>
+<p>“<em>Can you view the flag</em>” - caption.</p>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-1.png" /></p>
+
+<p>Here we see classic “Hello, World!” message.</p>
+
+<p>So, when you see such pages the first two things you need to do is:</p>
+<ul>
+  <li>Content Discovery</li>
+  <li>Port Scanning</li>
+</ul>
+
+<p><strong>Port Scanning</strong></p>
+<ul>
+  <li>Rustscan is relatively new tool which makes port scanning faster, written in Rust.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rustscan <span class="nt">-a</span> 3.110.186.17 <span class="nt">--ulimit</span> 5000 <span class="nt">-r</span> 1-65535 <span class="nt">--</span> nmap <span class="nt">-A</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-18.png" /></p>
+
+<ul>
+  <li>Except the ports nothing interesting found in nmap results.</li>
+</ul>
+
+<p><strong>Content Discovery</strong></p>
+
+<ul>
+  <li>I like to use <code class="language-plaintext highlighter-rouge">ffuf</code> for everything, some may like to use <code class="language-plaintext highlighter-rouge">gobuster</code>. Both tools are written in goLang.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-2.png" /></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffuf <span class="nt">-u</span> http://3.110.186.17/FUZZ <span class="nt">-w</span> /usr/share/seclists/Discovery/Web-Content/common.txt
+</code></pre></div></div>
+
+<p>The endpoints we’ve found are:</p>
+<ul>
+  <li>/console</li>
+  <li>/download</li>
+  <li>/message</li>
+</ul>
+
+<h3 id="console"><em>/console</em></h3>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-3.png" /></p>
+
+<ul>
+  <li>If we visit <code class="language-plaintext highlighter-rouge">/console</code> we can see <code class="language-plaintext highlighter-rouge">werkzeug</code> console page which is locked with <em>PIN</em>. Possible <em>RCE</em></li>
+</ul>
+
+<h3 id="message"><em>/message</em></h3>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-4.png" /></p>
+
+<ul>
+  <li>We can see a hint here, so note this path down</li>
+</ul>
+
+<h3 id="download"><em>/download</em></h3>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-5.png" /></p>
+
+<ul>
+  <li>We see “We don’t allow requests to this endpoint.” - interesting.</li>
+  <li>In CTFs and in general you also need to look at the source code of the endpoints, so let’s have a look here. I looked for any leaks on previous endpoints also but nothing interesting found.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-6.png" /></p>
+
+<ul>
+  <li>We can see a hint here, <code class="language-plaintext highlighter-rouge">&lt;!--GET--&gt;</code> requests are not allowed. Which only means we need to fuzz for <em>http request methods</em>.</li>
+  <li>So, I fire up the burp for <em>http method request</em> fuzzing.</li>
+  <li>Sent the request to <em>Repeater</em> tab, I started changing request methods manually because the number of request methods are only handful.</li>
+  <li>I tried using <code class="language-plaintext highlighter-rouge">POST</code> method but we get similar message as in <code class="language-plaintext highlighter-rouge">GET</code></li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-7.png" /></p>
+
+<ul>
+  <li>Tried with <code class="language-plaintext highlighter-rouge">HEAD</code> to get all the available request methods but there was no useful response</li>
+  <li>Tried with <code class="language-plaintext highlighter-rouge">PUT</code> and we get something very interesting lead: “<em>Invalid/missing parameter(s).</em>”</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-8.png" /></p>
+
+<ul>
+  <li>Which only means we need to fuzz for parameters, <code class="language-plaintext highlighter-rouge">param-miner</code> is a popular burp extension for fuzzing http headers, parameters etc but only available on burp suite pro edition</li>
+  <li>But one can try <code class="language-plaintext highlighter-rouge">arjun</code> tool written in python, I assume it doesn’t support <code class="language-plaintext highlighter-rouge">PUT</code> method</li>
+  <li>But I had no luck with both the tools, which means I need to try with <code class="language-plaintext highlighter-rouge">ffuf</code> or <code class="language-plaintext highlighter-rouge">intruder</code>. I went with intruder.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-9.png" /></p>
+
+<ul>
+  <li>But I couldn’t find anything because I forgot to mention <code class="language-plaintext highlighter-rouge">Content-Type</code> header.</li>
+  <li>I ran it again with <code class="language-plaintext highlighter-rouge">Content-Type: application/x-www-form-urlencoded</code> header.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-10.png" /></p>
+
+<ul>
+  <li>I sorted the results with the length since all return <code class="language-plaintext highlighter-rouge">200 OK</code>.</li>
+  <li>And we find pretty interesting parameter <code class="language-plaintext highlighter-rouge">filename</code>, usually vulnerable to SSRF, LFI, RFI, OS command injection, sometimes maybe SQLi etc</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-11.png" /></p>
+
+<ul>
+  <li>In response, “<em>No such file: /home/admin/BugTrials/test</em>” if we observe carefully, there is <code class="language-plaintext highlighter-rouge">test</code> value we provided in fuzzing, is directly appended to the path.</li>
+  <li>Which means we as an attacker can control this parameter, let’s try with <em>LFI</em></li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-12.png" /></p>
+
+<ul>
+  <li>But seems like, the dots and slashes are removed, there is some sanitization that developers use to prevent LFI</li>
+  <li>But let’s check with famous LFI payload: <code class="language-plaintext highlighter-rouge">....//....//....//etc/passwd</code></li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-13.png" /></p>
+
+<ul>
+  <li>We can also note the username: <em>tuhin1729</em></li>
+  <li>So what’s really happening in high level view is that developers tried to mitigate LFI but they couldn’t account for 
+recursive dots and slashes. I recommend learning LFI from <em>Hack the box Academy</em></li>
+  <li>Nice, we have found LFI vulnerability but where to look for flag or something interesting. If you remember we
+have found a hint on <em><code class="language-plaintext highlighter-rouge">/message</code></em> endpoint -&gt; <code class="language-plaintext highlighter-rouge">/home/admin/secret.txt</code></li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-14.png" /></p>
+
+<ul>
+  <li>Umm, no flag uh?</li>
+  <li><em>“The developer of this challenge mistakenly posted some sensitive information in pastebin. Can you find it”</em></li>
+  <li>Which means we may find something interesting on a pastebin file, but we didn’t find any pastebin link.</li>
+  <li>Well, if we read carefully, there are two things we can search on pastebin for: <em>developer name and challenge name</em>.</li>
+  <li>There’s no developer name given in the challenge but we can try username we found on <code class="language-plaintext highlighter-rouge">/etc/passwd</code> file <em>tuhin1729</em></li>
+  <li>Or if you had joined their discord challenge, you would’ve known who created this challenge.</li>
+  <li>But there were no results found but we can try with challenge name <code class="language-plaintext highlighter-rouge">BugFile</code> and we see only one result.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-15.png" /></p>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-16.png" /></p>
+
+<ul>
+  <li>We can use the above found pin on <em><code class="language-plaintext highlighter-rouge">/console</code></em> endpoint</li>
+</ul>
+
+<h3 id="console-1"><em>/console</em></h3>
+<ul>
+  <li>To execute commands, we can take help from <a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/werkzeug">werkzeug Hacktricks</a></li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/bugfile-17.png" /></p>
+
+<ul>
+  <li>So that’s our 1st flag.</li>
+  <li>Now, if we had tried to exploit werkzeug we could have been in a rabbit hole. And there’s no way one can see through these challenges, only try harder and take breaks when you are exhausted.</li>
+</ul>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ul>
+  <li>If we land on a blank page on a real pentest or bug hunting or CTFs.</li>
+  <li>The 1st thing we need to do is <em>content discovery</em> and <em>port scanning</em></li>
+  <li>When we enumerated few endpoints we need to check for any leaks, generally api keys and tokens are found in js files on real pentests, in the source code and also do <em>http method</em> fuzzing and <em>parameter fuzzing</em></li>
+  <li>And check for reflection of user input, provided to the parameters found, in the response and fuzz those parameters for any vulnerability that parameter may belong to.</li>
+</ul>
+
+<h2 id="admin-panel">Admin Panel</h2>
+<p>“<em>can you login?</em>” - caption</p>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-1.png" /></p>
+
+<ul>
+  <li>We see a login page with username and password</li>
+  <li>Also a <em>Forgot Password</em> hyperlink</li>
+  <li>If we take a look at source code: we can find username</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-2.png" /></p>
+
+<p><strong>Content Discovery</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ffuf <span class="nt">-u</span> http://13.127.95.30/FUZZ <span class="nt">-w</span> /usr/share/seclists/Discovery/Web-Content/common.txt
+</code></pre></div></div>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-3.png" /></p>
+
+<ul>
+  <li>We can only see one <em>200 OK</em> response which is <em>index.html</em> - just home page</li>
+</ul>
+
+<p><strong>Port Scanning</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rustscan <span class="nt">-a</span> 13.127.95.30 <span class="nt">--ulimit</span> 5000 <span class="nt">-r</span> 1-65535 <span class="nt">--</span> nmap <span class="nt">-A</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-4.png" /></p>
+
+<ul>
+  <li>Except the ports nothing interesting found in nmap results.</li>
+  <li>Only thing feasible now is <em>/passwordreset.php</em> endpoint</li>
+</ul>
+
+<h3 id="passwordresetphp"><em>/passwordreset.php</em></h3>
+<ul>
+  <li>Let’s input the username we found</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-6.png" /></p>
+
+<ul>
+  <li>We see a peculiar message here</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-5.png" /></p>
+
+<ul>
+  <li>If we take look at the source:</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-7.png" /></p>
+
+<ul>
+  <li>That red color masked thing is my public IP</li>
+  <li>At the bottom we see a comment for <em>administrator</em></li>
+  <li>If the administrator receives a password reset request, he/she needs to send a <em>curl</em> request to this same endpoint.</li>
+  <li>Which may suggest that we may need to use <em>curl</em> as our <code class="language-plaintext highlighter-rouge">User-Agent</code></li>
+  <li>Let’s try that:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://13.127.95.30/passwordreset.php
+</code></pre></div></div>
+
+<ul>
+  <li>But the response was same.</li>
+  <li>Maybe we have to do something with IP, <em>perhaps changing it?</em></li>
+  <li>Now, changing IP doesn’t mean we need VPN or proxy but we need to fool the system that we are from the same system (code, design, application, WAFs etc) that administrator would.</li>
+  <li>Maybe that doesn’t make sense, in simple terms the request that we are sending with curl should come from a private IP or localhost.</li>
+  <li>For this we can use <em>HTTP Headers</em> to bypass this restriction, generally used with <em>SSRF</em>.</li>
+  <li>You can get those header lists from googling or searching on GitHub <a href="https://github.com/alyrezo/ssrf-bypass">ssrf-bypass</a>, <a href="https://github.com/AZ3FU4D/SSRF-Bypass-List-2022/blob/master/Bypass%20List%202022.txt">SSRF List 2022</a></li>
+  <li>Now we can try with these headers on burp</li>
+  <li>Sent the request to repeater and copy, paste these payloads all at once, or you can try intruder.</li>
+  <li>And if you see, we’re able to change the IP to <em>127.0.0.1</em></li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-8.png" /></p>
+
+<ul>
+  <li>But <em>which header works is the question</em>, so I removed half and check and repeated the process like binary search, untill I’m left with <code class="language-plaintext highlighter-rouge">X-Client-IP</code> header.</li>
+  <li>But seems like this is harder than we thought, I was staring at the screen for few seconds and it hit me to try the website IP and I also changed the <code class="language-plaintext highlighter-rouge">User-Agent</code> header.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-9.png" /></p>
+
+<ul>
+  <li>Now, this did not make any sense when I read this response because we don’t have any endpoint to register nor did we see any endpoint related to email.</li>
+  <li>My first thought was token stealing using <em>referrer</em> header but that requires victim to visit any site we monitor and that’s not at all the case here.</li>
+  <li>I looked over <em>password reset functionalities</em> checklists but I didn’t really read thorough them.</li>
+  <li>So I called it a day.</li>
+  <li>In the morning with fresh mind, I had again gone through account takeover check list found on <em>Payload All The Things</em></li>
+  <li>And when I read <em>Password Reset Poisoning</em> which I already know but didn’t strike my mind.</li>
+  <li>I tired with <code class="language-plaintext highlighter-rouge">Host: burpcollaborator</code> but no luck then tried with <code class="language-plaintext highlighter-rouge">X-Forwarded-Host: burpcollaborator</code> wasn’t really expecting anything but…</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-10.png" /></p>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-11.png" /></p>
+
+<ul>
+  <li>I sent a GET with the token</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-12.png" /></p>
+
+<ul>
+  <li>No “<em>password</em>” parameter found in GET, let’s add that with a value.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-13.png" /></p>
+
+<ul>
+  <li>That’s all right we can increase password complexity</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-14.png" /></p>
+
+<ul>
+  <li>Now let’s try this on login panel we found initially.</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/adminpanel/admin-15.png" /></p>
+
+<ul>
+  <li>There you go, that’s our <em>second flag</em>.</li>
+</ul>
+
+<hr />
+
+<h2 id="an-open-port">An open port</h2>
+
+<p>“<em>ps. this port is open 4.224.22.66 2222</em>” - caption</p>
+
+<ul>
+  <li>So we are only given an IP and port: 2222</li>
+  <li>Let’s start with <em>port scanning</em></li>
+</ul>
+
+<p><strong>Port Scanning</strong></p>
+
+<p><img src="/assets/images/bugbasectf23/open-port/port-1.png" /></p>
+
+<ul>
+  <li>Um, No other ports than <code class="language-plaintext highlighter-rouge">22</code>, but the challenge said that there’s port: <code class="language-plaintext highlighter-rouge">2222</code></li>
+  <li>Port: <code class="language-plaintext highlighter-rouge">2222</code> is another port where SSH usually runs, I thought maybe this had to do with SSH.</li>
+  <li>I didn’t understand anything how to approach this particular challenge, so I went on to the Google and googled for any CTF challenges that had to do with <em>port</em></li>
+  <li>I learned a new thing while searching: <em>port knocking</em> a challenge was in few CTFs (picoCTF)</li>
+  <li>But the challenge had nothing to do with port knocking because port knocking requires ports, I had found few ports on shodan but they are all closed.</li>
+  <li>I thought I had to knock those ports, but it was a failure, read more about port knocking - it’s interesting..</li>
+  <li>So, what to do now?</li>
+  <li><em>There was this hint given on discord: “wait”</em></li>
+  <li>Um, seems like we need to wait for the port to be opened?</li>
+  <li>But for how long? And how do we find if the port is open?</li>
+  <li>Well, googling is your friend, so I had googled for a while and found few bash one-liners and found one utility created specifically for thing in nodeJS</li>
+  <li><a href="https://www.npmjs.com/package/wait-port">wait-port</a> is a utility – I think it sends TCP SYN packets continuously and waits for ACK.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wait-port 4.224.22.66:2222
+</code></pre></div>    </div>
+    <p><img src="/assets/images/bugbasectf23/open-port/2.png" /></p>
+  </li>
+  <li>I waited for some time and thought tool or maybe my approach is wrong but still ran it in the background.</li>
+  <li>Maybe the port opens for every 1hr or 2hrs</li>
+  <li>We know for sure that port opens once awhile but <em>what to do when it does?</em></li>
+  <li>I tried with nc, nmap, ssh, hydra default ssh passwords, but the port closes instantly.</li>
+  <li>And then after a while, I tried with curl</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wait-port 4.224.22.66:2222 <span class="o">&amp;&amp;</span> curl 4.224.22.66:2222
+</code></pre></div></div>
+<p><img src="/assets/images/bugbasectf23/open-port/3.png" /></p>
+
+<h2 id="key-takeways">Key Takeways</h2>
+<ul>
+  <li>Learn things, follow/make checklists, try to come up with your own methodology, build <em>hacker intuition</em> by solving labs, CTFs</li>
+  <li>You don’t always know the exact approach you need to take, research is a key thing in <em>information security</em></li>
+</ul>
+
+<hr />
+
+<h2 id="bibliosmia">Bibliosmia</h2>
+<p>https://hastebin.com/mihuhabila - c, d, u</p>
+
+<p><img src="/assets/images/bugbasectf23/misc/1.png" /></p>
+
+<ul>
+  <li>We are given with some cipher text and three alphabets.</li>
+  <li>I’m only strong in web and network, no way I would have done this without the <em>hints</em> that were provided in their discord.</li>
+  <li>First, Bibliosmia mean “<em>The smell and aroma of a good book</em>”</li>
+  <li>So, naturally I thought this had to do with some book cipher, but book cipher requires a book and page numbers. Maybe the three alphabets we got need to be converted into numbers but that still leave one required piece in the puzzle: book. <em>What book?</em></li>
+  <li>I tried with all bases normally found online</li>
+  <li>So I thought this is harder than the remaining challenges though there’s 100 points difference.</li>
+  <li>I waited for any <em>hints</em>:
+    <ul>
+      <li>Library</li>
+      <li>Babel tower image</li>
+    </ul>
+  </li>
+  <li>Um, let’s combine library, babel and add cipher to it and make a Google search</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/misc/2.png" /></p>
+
+<ul>
+  <li>Visited that link, very promising</li>
+  <li>In that, click on <a href="https://libraryofbabel.info/browse.cgi">Browse</a>, copy and paste the cipher we got and convert that c,d,u into numbers: 3, 4, 21</li>
+</ul>
+
+<p><img src="/assets/images/bugbasectf23/misc/4.png" /></p>
+
+<p><img src="/assets/images/bugbasectf23/misc/3.png" /></p>
+
+<ul>
+  <li>So that’s our <em>forth flag</em></li>
+</ul>
+
+<h2 id="key-takeaways-1">Key Takeaways</h2>
+<ul>
+  <li>Google more, Research, Take time.</li>
+</ul>
+
+<h5 id="happy-hacking-">Happy hacking :)</h5>
+
+
+
+  <small>tags: <em>ctf</em> - <em>writeup</em> - <em>bugbase</em></small>
+
+
+      </section>
+    </div>
+
+    
+  </body>
+</html>
