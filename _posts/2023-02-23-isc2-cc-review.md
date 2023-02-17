@@ -16,7 +16,7 @@ _How I passed (ISC)<sup>2</sup> CC_
 > To begin with, while the certification doesn't assess your technical abilities and is considered an entry-level certification, passing the exam is no easy feat and is only truly appreciated by those who have attempted it.
 
 ## whoami before studying for the cert
-I had a good understanding of web VAPT (why web? I'll tell you in a min) and networking, and was well-versed in the networking protocols OSI and TCP/IP. As a result, __network security__ module was not a challenge for me. I just needed to refresh my memory and get familiar with the way the exam questions were structured, which is crucial for success.
+I had a good understanding of web VAPT (why web? I'll tell you in a min) and networking, and was well-versed in the networking protocols OSI and TCP/IP. As a result, __network security__ module was not a challenge for me. I just needed to refresh my memory and get familiar with the way the exam questions were structured, which is crucial for these kinda exams.
 
 ## Why did I attempt this certification
 I attempted this certification exam with the goal of obtaining a certificate, and I found the challenge of the exam to be a positive experience. It's no secret that many people struggle to pass this exam even though it's an entry level cert, but as an infosec enthusiast, I enjoy being pushed out of my comfort zone and testing my knowledge.
